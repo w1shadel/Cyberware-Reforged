@@ -177,6 +177,9 @@ public class CyberwareUserData implements INBTSerializable<CompoundTag>, IEnergy
         return this.maxTolerance;
     }
 
+    public void setMaxTolerance(int value) {
+        this.maxTolerance = value;
+    }
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
@@ -393,7 +396,6 @@ public class CyberwareUserData implements INBTSerializable<CompoundTag>, IEnergy
         if (player == null)
             return;
         CompoundTag tag = this.serializeNBT();
-        tag.putInt("MaxTolerance", getMaxTolerance(player));
         A_PacketHandler.INSTANCE.send(
                 net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
                 new SyncCyberwareDataPacket(tag));

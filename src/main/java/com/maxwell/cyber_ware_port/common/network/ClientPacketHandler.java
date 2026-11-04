@@ -26,7 +26,9 @@ public class ClientPacketHandler {
         if (player != null) {
             player.getCapability(CyberwareCapabilityProvider.CYBERWARE_CAPABILITY).ifPresent(cyberware -> {
                 cyberware.deserializeNBT(msg.data());
-
+                if (msg.data().contains("MaxTolerance")) {
+                    cyberware.setMaxTolerance(msg.data().getInt("MaxTolerance"));
+                }
             });
 
         }

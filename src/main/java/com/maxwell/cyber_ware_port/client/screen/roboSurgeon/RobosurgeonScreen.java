@@ -378,6 +378,12 @@ public class RobosurgeonScreen extends AbstractContainerScreen<RobosurgeonMenu> 
         this.renderBackground(pGuiGraphics);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         int maxTolerance = 100;
+        if (this.minecraft != null && this.minecraft.player != null) {
+            maxTolerance = this.minecraft.player
+                    .getCapability(CyberwareCapabilityProvider.CYBERWARE_CAPABILITY)
+                    .map(data -> data.getMaxTolerance(this.minecraft.player))
+                    .orElse(100);
+        }
         SurgeryAlert alert = SurgeryAnalyzer.check(this.menu.slots, maxTolerance);
         if (alert != null) {
             int iconX = this.leftPos + 155;
